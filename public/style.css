@@ -15,6 +15,22 @@
   --pad-x:        clamp(1.25rem, 5vw, 2.5rem);
   --section-py:   clamp(4.5rem, 9vw, 7.5rem);
   --ease:         cubic-bezier(0.25, 0.1, 0.25, 1);
+  --nav-scrolled-bg:  rgba(249, 247, 244, 0.90);
+  --nav-mobile-bg:    rgba(249, 247, 244, 0.97);
+}
+
+/* ── Dark theme tokens ──────────────────────────────────────────── */
+[data-theme="dark"] {
+  --ground:          #1c1814;
+  --surface:         #252018;
+  --text:            #f0ece6;
+  --text-muted:      #9e9187;
+  --accent:          #e07830;
+  --accent-dim:      #3a2410;
+  --accent-glow:     rgba(224, 120, 48, 0.20);
+  --border:          #342e26;
+  --nav-scrolled-bg: rgba(28, 24, 20, 0.92);
+  --nav-mobile-bg:   rgba(28, 24, 20, 0.97);
 }
 
 /* ── Reset ──────────────────────────────────────────────────────── */
@@ -35,6 +51,7 @@ body {
   color: var(--text);
   line-height: 1.65;
   overflow-x: hidden;
+  transition: background-color 250ms var(--ease), color 250ms var(--ease);
 }
 
 img, svg { display: block; }
@@ -71,7 +88,7 @@ a {
 }
 
 #nav.scrolled {
-  background: rgba(249, 247, 244, 0.90);
+  background: var(--nav-scrolled-bg);
   backdrop-filter: blur(12px);
   -webkit-backdrop-filter: blur(12px);
   box-shadow: 0 1px 0 var(--border);
@@ -155,6 +172,37 @@ a {
   border-radius: 2px;
   transform-origin: center;
   transition: transform 280ms var(--ease), opacity 280ms var(--ease);
+}
+
+/* ── Nav right group ────────────────────────────────────────────── */
+.nav-right {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+/* ── Theme toggle button ────────────────────────────────────────── */
+.theme-toggle {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 34px;
+  height: 34px;
+  background: none;
+  border: 1.5px solid var(--border);
+  border-radius: var(--radius);
+  color: var(--text-muted);
+  cursor: pointer;
+  flex-shrink: 0;
+  transition:
+    border-color 180ms var(--ease),
+    color        180ms var(--ease),
+    background   180ms var(--ease);
+}
+
+.theme-toggle:hover {
+  border-color: var(--accent);
+  color: var(--accent);
 }
 
 /* ── Hero ───────────────────────────────────────────────────────── */
@@ -537,7 +585,9 @@ footer span {
   .nav-links a,
   .nav-links a::after,
   .project-card__link,
-  .contact-link {
+  .contact-link,
+  .theme-toggle,
+  body {
     transition: none;
   }
 }
@@ -557,7 +607,7 @@ footer span {
     flex-direction: column;
     align-items: flex-start;
     gap: 0;
-    background: rgba(249, 247, 244, 0.97);
+    background: var(--nav-mobile-bg);
     backdrop-filter: blur(12px);
     -webkit-backdrop-filter: blur(12px);
     border-bottom: 1px solid var(--border);
